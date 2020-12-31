@@ -1,0 +1,15 @@
+<section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-start mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate">
+          <span class="subheading">Posebna ponudba</span>
+          <h2 class="mb-4"><strong>Priljubljeni</strong> kampi &amp; destinacije</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row ftco-animate">
+            <app-camp-card *ngFor="let camp of camps | async; trackBy: trackById" [camp]="camp" class="col-sm col-md-6 col-lg"></app-camp-card>
+        </div>
+    </div>
+  </section>

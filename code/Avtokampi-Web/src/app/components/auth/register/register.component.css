@@ -1,0 +1,7 @@
+.block-17 {
+    background-color: transparent !important;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Prebrskaj";
+}

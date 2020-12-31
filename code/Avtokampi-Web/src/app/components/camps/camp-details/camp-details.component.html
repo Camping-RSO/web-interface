@@ -1,0 +1,158 @@
+<div class="hero-wrap js-fullheight" [style.background-image]="getImage((campImg | async) && (campImg | async)[0] && (campImg | async)[0]?.url ? (campImg | async)[0]?.url : '')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ (camp | async)?.naziv }}
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+
+                <div class="row justify-content-start mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <span class="subheading">Avtokamp</span>
+                        <h2><strong>{{ (camp | async)?.naziv }}</strong></h2>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li *ngFor="let img of campImg | async; let i = index; trackBy: trackByImgId" data-target="#carouselExampleIndicators"
+                                data-slide-to="0" class="{{ i == 0 ? 'active' : '' }}"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div *ngFor="let img of campImg | async; let i = index; trackBy: trackByImgId"
+                                class="carousel-item {{ i == 0 ? 'active' : '' }}">
+                                <img src="{{ getImageGallery(img.url) }}" class="d-block w-100" alt="">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Nazaj</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Naprej</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row justify-content-start mt-4 mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4"><strong>Opis</strong> kampa</h2>
+                        <p>
+                            {{ (camp | async)?.opis }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-start mt-4 mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4"><strong>Lokacija</strong> kampa</h2>
+                        <div>
+                            <agm-map [latitude]="45.180348" [longitude]="14.545060" [zoom]="8"
+                                     [disableDefaultUI]="false" [zoomControl]="false">
+                                <agm-marker [latitude]="(camp | async)?.koordinataX" [longitude]="(camp | async)?.koordinataY"></agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-start mt-4 mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4"><strong>Ponudba</strong> kampa</h2>
+
+                        <div class="row">
+
+                            <div *ngFor="let storitev of storitve" class="col-md-3">
+                                <div class="destination">
+                                    <div class="text p-3">
+                                        <div class="d-flex">
+                                            <div class="one">
+                                                <h3>{{ storitev }}</h3>
+                                                <p class="rate">
+                                                    <i class="icon-star"></i>
+                                                    <i class="icon-star"></i>
+                                                    <i class="icon-star"></i>
+                                                    <i class="icon-star"></i>
+                                                    <i class="icon-star-o"></i>
+                                                    <span>8 ocen</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-start mt-4 mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4"><strong>Rezerviraj</strong> kampirno mesto</h2>
+
+                        <app-camping-pitches [campId]="campId" [camp]="(camp | async)"></app-camping-pitches>
+                    </div>
+                </div>
+
+                <div class="row justify-content-start mt-4 mb-3 pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4"><strong>Mnenja</strong> naših strank</h2>
+
+                        <div class="mt-5">
+                            <h3 class="mb-5">{{ (mnenja | async)?.length }} komentarjev</h3>
+                            <ul class="comment-list">
+
+                                <li *ngFor="let comment of mnenja | async; trackBy: trackByCommentId" class="comment">
+                                    <div class="vcard bio">
+                                        <img src="assets/images/person_1.jpg" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h3>John Doe</h3>
+                                        <p class="rate">
+                                            <i *ngFor="let rate of getRange()" class="{{ rate <= comment?.ocena ? 'icon-star' : 'icon-star-o' }}"></i>
+                                        </p>
+                                        <div class="meta">{{ "2020-12-31T10:17:57.980946" }}</div>
+                                        <p>
+                                            {{ comment?.mnenje }}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- END comment-list -->
+
+                            <div class="comment-form-wrap pt-5" *ngIf="false">
+                                <h3 class="mb-5">Pustite komentar</h3>
+                                <form action="#" class="p-5 bg-light">
+
+                                    <div class="form-group">
+                                        <label for="message">Mnenje</label>
+                                        <textarea name="" id="message" cols="30" rows="10"
+                                            class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Objavi komentar" class="btn py-3 px-4 btn-primary">
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

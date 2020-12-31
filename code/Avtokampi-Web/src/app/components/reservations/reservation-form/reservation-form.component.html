@@ -1,0 +1,99 @@
+<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_5.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Izberite termin
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container">
+        <div class="row justify-content-start mb-2 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Čas vašega dopusta</span>
+                <h2 class="mb-4"><strong>Izberite</strong> termin</h2>
+            </div>
+        </div>
+        <div class="row block-9">
+            <div class="col-md-12 pr-md-6">
+                <form [formGroup]="reservationForm" (ngSubmit)="submitForm()">
+                    <div class="row">
+                        <div class="form-group col">
+                            <input type="date" formControlName="trajanjeOd" class="form-control" placeholder="Od"
+                                required>
+                        </div>
+                        <div class="form-group col">
+                            <input type="date" formControlName="trajanjeDo" class="form-control" placeholder="Do"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="fields">
+                            <div class="select-wrap one-third">
+                                <!-- <div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
+                                <select formControlName="vrstaKampiranja" class="form-control" placeholder="Vrsta kampiranja" required>
+                                  <option value="">-- Izberite vrsto kampiranja --</option>
+                                  <option *ngFor="let vrsta of vrstaKampiranjaKampa; trackBy: trackById" [value]="vrsta.vrstaKampiranjaId">{{ vrsta.naziv }}</option>
+                                </select>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="gdpr" id="gdpr-checkbox"
+                                required>
+                            <label class="form-check-label" for="gdpr-checkbox">
+                                Dovolim pošiljanje ter hranjenje podatkov tega
+                                obrazca in se strinjam s splošnimi pogoji (uredba GDPR)
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" value="Rezerviraj" [disabled]="!reservationForm.valid"
+                        class="btn btn-primary py-3 px-5">
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start mt-5 mb-2 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Vaša izbira</span>
+                <h2 class="mb-4"><strong>Izbrane</strong> storitve</h2>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <span class="subheading">Kampirno mesto</span>
+                </div>
+                <app-camping-pitches [campId]="campId" [camp]="camp" [kampMesta]="getKampMestoArray()">
+                </app-camping-pitches>
+                <div class="mb-5">
+                    <a routerLink="../../" class="btn btn-primary py-2 px-5">Nazaj na izbiro mest</a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <span class="subheading">Avtokamp</span>
+                </div>
+
+                <app-camp-card [campId]="campId" [camp]="camp"></app-camp-card>
+
+                <div class="mb-5">
+                    <a routerLink="../../../" class="btn btn-primary py-2 px-5">Nazaj na izbiro kampov</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

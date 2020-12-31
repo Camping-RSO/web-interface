@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/home">
+            <img src="assets/images/logo/ikona.png" width="40" height="40" class="d-inline-block align-top" alt="logo">
+            Avtokampi
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Meni
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/home" class="nav-link">Domov</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/camps" class="nav-link">Avtokampi</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/maps" class="nav-link">Zemljevid</a>
+                </li>
+                <li *appShowAuthed="false" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/auth/register" class="nav-link">Registracija</a>
+                </li>
+                <li *appShowAuthed="false" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/auth/login" class="nav-link">Prijava</a>
+                </li>
+<!--                <li *appShowAuthed="true" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">-->
+<!--                    <a routerLink="/auth/login" class="nav-link">{{ currentUser.ime + " " + currentUser.priimek }}</a>-->
+<!--                </li>-->
+                <li *appShowAuthed="true" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/user-profile" class="nav-link">{{ currentUser.ime + " " + currentUser.priimek }}</a>
+                </li>
+                <li *appShowAuthed="true" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/" class="nav-link" (click)="logout()">Odjava</a>
+                </li>
+                <li class="nav-item cta">
+                    <a routerLink="/reservations" class="nav-link"><span>Rezerviraj zdaj</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->

@@ -1,0 +1,51 @@
+<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_2.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+             data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Vaše rezervacije</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="row ftco-animate">
+                <div *ngFor="let res of reservations; trackBy: trackById" class="col-md-4">
+                    <div class="destination">
+                        <div class="img img-2 d-flex justify-content-center align-items-center"
+                           [style.background-image]="getImage(campImages[res?.rezervacijaId]?.url)">
+                        </div>
+                        <div class="text p-3">
+                            <div class="d-flex">
+                                <div class="one">
+                                    <h3>{{ camps[res.rezervacijaId]?.naziv }}</h3>
+                                    <h6>{{ campingSpots[res.rezervacijaId]?.naziv }}</h6>
+                                    <p class="rate">
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star"></i>
+                                        <i class="icon-star-o"></i>
+                                        <i class="icon-star-o"></i>
+                                        <span>8 ocen</span>
+                                    </p>
+                                    <p>T: {{ camps[res.rezervacijaId]?.telefon }}</p>
+        <!--                            <p>{{ res?.statusRezervacije }}</p>-->
+                                    <p>{{ res?.trajanje_od + " - " + res?.trajanje_do }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> {{ camps[res.rezervacijaId]?.naslov }}</span>
+        <!--                        <span class="ml-auto"><a (click)="onSelect(camp, mesto)">Rezerviraj</a></span>-->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
