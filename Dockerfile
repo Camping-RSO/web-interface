@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 COPY code/Avtokampi-Web/package.json code/Avtokampi-Web/package-lock.json ./
 RUN npm install
 COPY code/Avtokampi-Web/ .
-ENV BASE_PATH="camping-web-interface"
+ARG BASE_PATH="camping-web-interface"
 RUN npm run build -- --prod --base-href="/$BASE_PATH" --deploy-url="$BASE_PATH/"
 
 ### STAGE 2: Run ###
