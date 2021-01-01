@@ -50,14 +50,14 @@ export class CampDetailsComponent implements OnInit, OnDestroy {
     }
 
     getImage(image: any) {
-        const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('data:image/jpg;base64,${image}')`) :
+        const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('${image}')`) :
             `url('camping-web-interface/assets/images/destination-1.jpg')`;
         return preparedImg;
     }
 
     getImageGallery(image: any) {
-        const preparedImg = image ? `data:image/jpg;base64,${image}` :
-            `assets/images/destination-1.jpg`;
+        const preparedImg = image ? `${image}` :
+            `camping-web-interface/assets/images/destination-1.jpg`;
         return preparedImg;
     }
 

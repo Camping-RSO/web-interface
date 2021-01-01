@@ -28,7 +28,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        console.log(this.userService.currentUser);
+        console.log(this.userService.currentUserObject);
         this.userService.currentUser.pipe(takeUntil(this._onDestroy)).subscribe(userData => this.currentUser = userData);
+        this.currentUser = this.userService.currentUserObject;
 
         this.rezervacijeService.getUserReservations(this.currentUser.uporabnikId)
                                .pipe(takeUntil(this._onDestroy))
@@ -37,7 +40,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             this.camps = [];
             this.campingSpots = [];
             this.campImages = [];
-            for (let res of this.reservations) {
+            for (const res of this.reservations) {
                 this.avtokampiService.get(res.avtokamp)
                                      .pipe(takeUntil(this._onDestroy))
                                      .subscribe(m => this.camps[res.rezervacijaId] = m);
@@ -59,7 +62,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
 
     getImage(image: any) {
-        const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('data:image/jpg;base64,${image}')`) :
+        const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('${image}')`) :
             `url('camping-web-interface/assets/images/destination-1.jpg')`;
         return preparedImg;
     }
