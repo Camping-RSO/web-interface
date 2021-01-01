@@ -60,7 +60,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     getImage(image: any) {
         const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('data:image/jpg;base64,${image}')`) :
-            `url('assets/images/destination-1.jpg')`;
+            `url('camping-web-interface/assets/images/destination-1.jpg')`;
         return preparedImg;
     }
 

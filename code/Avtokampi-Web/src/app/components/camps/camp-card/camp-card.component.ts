@@ -61,13 +61,13 @@ export class CampCardComponent implements OnInit, OnDestroy {
 
     getImage(image: any) {
         // const preparedImg = image ? this.domSanitizer.bypassSecurityTrustStyle(`url('data:image/jpg;base64,${image}')`) :
-        //     `url('assets/images/destination-1.jpg')`;
+        //     `url('camping-web-interface/assets/images/destination-1.jpg')`;
         return image ? this.domSanitizer.bypassSecurityTrustStyle(`url('${image}')`) :
-            `url('assets/images/destination-1.jpg')`;
+            `url('camping-web-interface/assets/images/destination-1.jpg')`;
         // return image ? this.http.get(image, {responseType: 'blob'}).subscribe(result => {
         //         console.log(result);
         //         return result;
-        //     }) : `url('assets/images/destination-1.jpg')`;
+        //     }) : `url('camping-web-interface/assets/images/destination-1.jpg')`;
     }
 
     onSelect(camp: Avtokamp) {
